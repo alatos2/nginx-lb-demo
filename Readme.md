@@ -1,6 +1,6 @@
 # Example: NGINX as a load balancer, reverse proxy and HTTP cache
 
-## Scenario: We have two backend applications running on http://localhost:8080 (within a Docker container). We want NGINX to serve as the public-facing entry point, listening on port 80, and forwarding requests to this backend.
+### Scenario: We have two backend applications running on http://localhost:8080 (within a Docker container). We want NGINX to serve as the public-facing entry point, listening on port 80, and forwarding requests to this backend.
 
 ### To test for load balancing and reverse proxy:
 1. docker-compose up --build -d
