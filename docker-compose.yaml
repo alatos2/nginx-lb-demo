@@ -1,0 +1,43 @@
+version: 3.8
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_lb
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx_cache_data:/var/cache/nginx
+    depends_on:
+      - backend1
+      - backend2
+    networks:
+      - lb_network
+
+  backend1:
+    build:
+      context: ./backend1
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+    networks:
+      - lb_network
+    container_name: backend1_server
+
+  backend2:
+    build:
+      context: ./backend2
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+    networks:
+      - lb_network
+    container_name: backend2_server
+
+networks:
+  lb_network:
+    driver: bridge
+
+volumes:
+  nginx_cache_data:
